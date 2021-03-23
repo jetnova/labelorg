@@ -1,0 +1,8 @@
+<h3><%= @release.title %></h3>
+<ul>
+  <% @release.release_recordings.each do |track| %>
+    <li><%= track.track_number %>. <%= track.recording.title %></li>
+  <% end %>
+</ul>
+
+<%= link_to 'Back to Releases', record_label_releases_path(current_user.record_label) %>

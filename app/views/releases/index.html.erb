@@ -1,0 +1,9 @@
+<h3><%= current_user.record_label.name %> Releases</h3>
+
+<ul>
+  <% @releases.each do |release| %>
+    <li>
+      <%= link_to "#{release.title}", record_label_release_path(current_user.record_label, release) %>, <%= release.format.description %>, <%= release.territory.name %>, <%= release.release_date %>
+    </li>
+  <% end %>
+</ul>

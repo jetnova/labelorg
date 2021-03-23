@@ -1,0 +1,7 @@
+<nav>
+  <% if user_signed_in? %>
+    <%= link_to "#{current_user.record_label.name}", authenticated_root_path %>
+    <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+  <% end %>
+
+</nav>
