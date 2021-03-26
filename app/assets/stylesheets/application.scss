@@ -14,3 +14,29 @@
  *= require_self
  */
 @import "components/index";
+
+body {
+  margin: 0;
+}
+
+ul{
+  list-style-type: none;
+  padding-left: 8px;
+}
+
+#main-body {
+  display: flex;
+  min-height: calc(100vh - 80px)
+}
+
+#main-section {
+  width: 70%;
+  border: 1px solid red;
+  padding: 24px;
+}
+
+#info-bar {
+  width: 30%;
+  border: 1px solid red;
+  padding: 24px;
+}
