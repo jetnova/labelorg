@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_26_095750) do
+ActiveRecord::Schema.define(version: 2021_03_26_171949) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "act_musicians", force: :cascade do |t|
+    t.boolean "current", default: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "musician_id"
+    t.bigint "act_id"
+    t.index ["act_id"], name: "index_act_musicians_on_act_id"
+    t.index ["musician_id"], name: "index_act_musicians_on_musician_id"
+  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -47,6 +57,7 @@ ActiveRecord::Schema.define(version: 2021_03_26_095750) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "active"
   end
 
   create_table "formats", force: :cascade do |t|
@@ -65,6 +76,12 @@ ActiveRecord::Schema.define(version: 2021_03_26_095750) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.date "dob"
+    t.string "cob"
+    t.string "nationality"
+    t.string "ipi"
+    t.string "cae"
+    t.string "isrc_stem"
   end
 
   create_table "playlist_recordings", force: :cascade do |t|
@@ -116,6 +133,7 @@ ActiveRecord::Schema.define(version: 2021_03_26_095750) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "isrc_stem"
   end
 
   create_table "recording_acts", force: :cascade do |t|
@@ -177,6 +195,12 @@ ActiveRecord::Schema.define(version: 2021_03_26_095750) do
     t.index ["release_id"], name: "index_release_recordings_on_release_id"
   end
 
+  create_table "release_types", force: :cascade do |t|
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "releases", force: :cascade do |t|
     t.string "title"
     t.string "album_artist"
@@ -186,8 +210,10 @@ ActiveRecord::Schema.define(version: 2021_03_26_095750) do
     t.bigint "format_id"
     t.bigint "territory_id"
     t.bigint "record_deal_id"
+    t.bigint "release_type_id"
     t.index ["format_id"], name: "index_releases_on_format_id"
     t.index ["record_deal_id"], name: "index_releases_on_record_deal_id"
+    t.index ["release_type_id"], name: "index_releases_on_release_type_id"
     t.index ["territory_id"], name: "index_releases_on_territory_id"
   end
 
@@ -205,6 +231,7 @@ ActiveRecord::Schema.define(version: 2021_03_26_095750) do
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "iswc"
   end
 
   create_table "territories", force: :cascade do |t|
@@ -230,6 +257,8 @@ ActiveRecord::Schema.define(version: 2021_03_26_095750) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "act_musicians", "acts"
+  add_foreign_key "act_musicians", "musicians"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "playlist_recordings", "playlists"
@@ -254,6 +283,7 @@ ActiveRecord::Schema.define(version: 2021_03_26_095750) do
   add_foreign_key "release_recordings", "releases"
   add_foreign_key "releases", "formats"
   add_foreign_key "releases", "record_deals"
+  add_foreign_key "releases", "release_types"
   add_foreign_key "releases", "territories"
   add_foreign_key "song_composers", "musicians"
   add_foreign_key "song_composers", "songs"
