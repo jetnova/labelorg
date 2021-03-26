@@ -10,4 +10,17 @@ class Musician < ApplicationRecord
   has_many :recordings, through: :recording_performers
   # N:N with recording_acts, join table being recording_performers
   has_many :recording_acts, through: :recording_performers
+
+  validates :name, presence: true
+
+  include PgSearch::Model
+  pg_search_scope :musicians_search,
+                  against: :name,
+                  # associated_against: {
+                  #   acts: :name,
+                  #   recordings: :title
+                  # },
+                  using: {
+                    tsearch: { prefix: true }
+                  }
 end

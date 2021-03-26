@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations' }
 
-  resources :record_labels, only: %i[show edit update] do
-    resources :releases
+  resources :record_labels, except: :index do
+    resources :acts
     resources :playlists
+    resources :record_deals
+    resources :recordings, except: :edit
+    resources :releases
   end
+
+  resources :musicians
 
   devise_scope :user do
     authenticated :user do

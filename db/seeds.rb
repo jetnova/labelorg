@@ -1,11 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
 Recording.destroy_all
 ReleaseAct.destroy_all
 Release.destroy_all
@@ -17,10 +9,13 @@ ReleaseRecording.destroy_all
 
 cd = Format.create!(description: 'Compact Disk - Digipak')
 vinyl = Format.create!(description: '12" Vinyl')
+digital = Format.create!(description: 'Digital')
+
 
 darko = Act.create!(name: 'Darko')
-bonsai = Release.create!(title: 'Bonsai Mammoth', record_label_id: 1, territory_id: 1, format_id: cd.id, release_date: Date.new(2017,2,3))
-ReleaseAct.create!(act_id: darko.id, release_id: bonsai.id)
+lock_dark = RecordDeal.create!(start_date: Date.new(2014,1,1), end_date: Date.new(2021,5,1), act_id: darko.id, record_label_id: 1)
+bonsai = Release.create!(title: 'Bonsai Mammoth', record_deal_id: lock_dark.id, territory_id: 1, format_id: cd.id, release_date: Date.new(2017,2,3))
+
 
 songs = [
   Song.create!(title: 'Life Forms'),
@@ -40,4 +35,24 @@ songs.each_with_index do |song, index|
   recording = Recording.create!(song_id: song.id, title: song.title, genre_id: 1)
   RecordingAct.create!(recording_id: recording.id, act_id: darko.id)
   ReleaseRecording.create!(release_id: bonsai.id, recording_id: recording.id, track_number: index + 1)
+  RecordDealRecording.create!(recording_id: recording.id, record_deal_id: lock_dark.id)
+end
+
+sea = Release.create!(title: 'Sea of Trees', record_deal_id: lock_dark.id, territory_id: 1, format_id: digital.id, release_date: Date.new(2014,9,8))
+ReleaseAct.create!(act_id: darko.id, release_id: sea.id)
+
+songs = [
+  Song.create!(title: 'Prologue (A Voice Unheard)'),
+  Song.create!(title: 'Canthus Viewpoints'),
+  Song.create!(title: 'Atlas to Atlantis'),
+  Song.create!(title: 'Hanging off a Memory'),
+  Song.create!(title: 'Timepieces and Lock Shaped Hearts'),
+  Song.create!(title: 'Seaward')
+]
+
+songs.each_with_index do |song, index|
+  recording = Recording.create!(song_id: song.id, title: song.title, genre_id: 1)
+  RecordingAct.create!(recording_id: recording.id, act_id: darko.id)
+  ReleaseRecording.create!(release_id: sea.id, recording_id: recording.id, track_number: index + 1)
+  RecordDealRecording.create!(recording_id: recording.id, record_deal_id: lock_dark.id)
 end

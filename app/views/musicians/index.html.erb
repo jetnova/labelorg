@@ -1,0 +1,18 @@
+<h3>Musicians</h3>
+<%= form_tag musicians_path, class: "form-inline", method: :get do %>
+  <%= text_field_tag :query,
+    params[:query],
+    class: "form-control form-control-sm mb-2",
+    placeholder: "Search..."
+  %>
+  <%= submit_tag "Submit" %>
+<% end %>
+<% if @musicians %>
+  <ul>
+      <% @musicians.each do |musician| %>
+        <p><%= musician.name %></p>
+      <% end %>
+  </ul>
+<% end %>
+<%= link_to 'Create New Musician Record', new_musician_path %>
+<%= link_to 'Back to Home', authenticated_root_path %>

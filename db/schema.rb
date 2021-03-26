@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_23_221547) do
+ActiveRecord::Schema.define(version: 2021_03_26_095750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,26 @@ ActiveRecord::Schema.define(version: 2021_03_23_221547) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "record_deal_recordings", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "record_deal_id"
+    t.bigint "recording_id"
+    t.index ["record_deal_id"], name: "index_record_deal_recordings_on_record_deal_id"
+    t.index ["recording_id"], name: "index_record_deal_recordings_on_recording_id"
+  end
+
+  create_table "record_deals", force: :cascade do |t|
+    t.date "start_date"
+    t.date "end_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "record_label_id"
+    t.bigint "act_id"
+    t.index ["act_id"], name: "index_record_deals_on_act_id"
+    t.index ["record_label_id"], name: "index_record_deals_on_record_label_id"
+  end
+
   create_table "record_label_acts", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -132,6 +152,8 @@ ActiveRecord::Schema.define(version: 2021_03_23_221547) do
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "isrc"
+    t.integer "bpm"
     t.index ["genre_id"], name: "index_recordings_on_genre_id"
     t.index ["song_id"], name: "index_recordings_on_song_id"
   end
@@ -161,11 +183,11 @@ ActiveRecord::Schema.define(version: 2021_03_23_221547) do
     t.date "release_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "record_label_id"
     t.bigint "format_id"
     t.bigint "territory_id"
+    t.bigint "record_deal_id"
     t.index ["format_id"], name: "index_releases_on_format_id"
-    t.index ["record_label_id"], name: "index_releases_on_record_label_id"
+    t.index ["record_deal_id"], name: "index_releases_on_record_deal_id"
     t.index ["territory_id"], name: "index_releases_on_territory_id"
   end
 
@@ -201,6 +223,8 @@ ActiveRecord::Schema.define(version: 2021_03_23_221547) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "admin", default: false
     t.bigint "record_label_id"
+    t.string "first_name", null: false
+    t.string "last_name", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["record_label_id"], name: "index_users_on_record_label_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -210,6 +234,10 @@ ActiveRecord::Schema.define(version: 2021_03_23_221547) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "playlist_recordings", "playlists"
   add_foreign_key "playlist_recordings", "recordings"
+  add_foreign_key "record_deal_recordings", "record_deals"
+  add_foreign_key "record_deal_recordings", "recordings"
+  add_foreign_key "record_deals", "acts"
+  add_foreign_key "record_deals", "record_labels"
   add_foreign_key "record_label_acts", "acts"
   add_foreign_key "record_label_acts", "record_labels"
   add_foreign_key "recording_acts", "acts"
@@ -225,7 +253,7 @@ ActiveRecord::Schema.define(version: 2021_03_23_221547) do
   add_foreign_key "release_recordings", "recordings"
   add_foreign_key "release_recordings", "releases"
   add_foreign_key "releases", "formats"
-  add_foreign_key "releases", "record_labels"
+  add_foreign_key "releases", "record_deals"
   add_foreign_key "releases", "territories"
   add_foreign_key "song_composers", "musicians"
   add_foreign_key "song_composers", "songs"

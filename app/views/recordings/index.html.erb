@@ -1,1 +1,21 @@
-Catalogue!!
+<h3><%= current_user.record_label.name %> Recordings</h3>
+<%= form_tag record_label_recordings_path(current_user.record_label), class: "form-inline", method: :get do %>
+  <%= text_field_tag :query,
+    params[:query],
+    class: "form-control form-control-sm mb-2",
+    placeholder: "Search..."
+  %>
+  <%= submit_tag "Submit" %>
+<% end %>
+<% if @recordings %>
+  <ul>
+      <% @recordings.each do |recording| %>
+        <h4><%= recording_acts_formatter(recording) %></h4>
+        <li>
+          <%= link_to "#{recording.title}", record_label_recording_path(current_user.record_label, recording) %>
+        </li>
+      <% end %>
+  </ul>
+<% end %>
+<%= link_to 'Back to Home', authenticated_root_path %>
+

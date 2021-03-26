@@ -1,6 +1,19 @@
 class ReleasesController < ApplicationController
   def index
-    @releases = policy_scope(Release).order(release_date: :desc)
+    if params[:query].present?
+      @releases = policy_scope(Release).releases_search(params[:query]).order(release_date: :desc)
+    else
+      skip_policy_scope
+    end
+  end
+
+  def new
+    @release = Release.new
+    authorize @release
+    # @record_deals = policy_scope(RecordDeal)
+    @territories = Territory.all
+    @formats = Format.all
+
   end
 
   def show

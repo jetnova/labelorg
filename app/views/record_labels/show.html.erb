@@ -1,5 +1,7 @@
 <h3><%= @record_label.name %></h3>
 <ul>
   <li><%= link_to "Releases", record_label_releases_path(@record_label) %></li>
+  <li><%= link_to "Recordings", record_label_recordings_path(@record_label) %></li>
   <li><%= link_to "Playlists", record_label_playlists_path(@record_label) %></li>
+  <li><%= link_to "Musicians", musicians_path %></li>
 </ul>

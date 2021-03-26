@@ -4,6 +4,14 @@ class RecordLabelsController < ApplicationController
     authorize @record_label
   end
 
+  def new
+    @record_label = RecordLabel.new
+    authorize @record_label
+  end
+
+  def create
+  end
+
   def edit
   end
 

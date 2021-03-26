@@ -1,0 +1,2 @@
+module ReleaseRecordingsHelper
+end
