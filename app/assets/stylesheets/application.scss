@@ -1,22 +1,15 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
 @import "components/index";
+
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100;400;700&family=Shadows+Into+Light&display=swap');
 
 body {
   margin: 0;
+
+  font-family: 'Lexend', sans-serif;
+}
+
+a {
+  text-decoration: none;
 }
 
 ul{
@@ -31,12 +24,11 @@ ul{
 
 #main-section {
   width: 70%;
-  border: 1px solid red;
   padding: 24px;
 }
 
 #info-bar {
   width: 30%;
-  border: 1px solid red;
   padding: 24px;
+  background: #E4E4E4;
 }

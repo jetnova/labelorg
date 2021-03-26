@@ -1,5 +1,19 @@
 <nav>
   <% if user_signed_in? %>
+    <div id="tabs">
+      <%= link_to record_label_releases_path(current_user.record_label) do %>
+        <div class="tab">Releases</div>
+      <% end %>
+      <%= link_to record_label_recordings_path(current_user.record_label) do %>
+        <div class="tab">Recordings</div>
+      <% end %>
+      <%= link_to record_label_playlists_path(current_user.record_label) do %>
+        <div class="tab">Playlists</div>
+      <% end %>
+      <%= link_to musicians_path do %>
+        <div class="tab">Musicians</div>
+      <% end %>
+    </div>
     <p><%= current_user.first_name %></p>
     <%= link_to "#{current_user.record_label.name}", authenticated_root_path %>
     <%= link_to "Log out", destroy_user_session_path, method: :delete %>
