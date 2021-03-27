@@ -4,8 +4,13 @@
 
 body {
   margin: 0;
+  background: #F8F8F8;
 
   font-family: 'Lexend', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #254E70;
 }
 
 a {
@@ -25,10 +30,29 @@ ul{
 #main-section {
   width: 70%;
   padding: 24px;
+
+  display: flex;
+  justify-content: center;
 }
 
 #info-bar {
   width: 30%;
   padding: 24px;
   background: #E4E4E4;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+}
+
+.just-cont-cent {
+  justify-content: center;
+}
+
+.marg-16px {
+  margin: 16px;
 }
