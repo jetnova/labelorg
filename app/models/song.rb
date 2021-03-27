@@ -6,4 +6,15 @@ class Song < ApplicationRecord
   has_many :musicians, through: :song_composers
 
   validates :title, presence: true
+
+  include PgSearch::Model
+  pg_search_scope :musicians_search,
+                  against: :name,
+                  # associated_against: {
+                  #   acts: :name,
+                  #   recordings: :title
+                  # },
+                  using: {
+                    tsearch: { prefix: true }
+                  }
 end

@@ -7,11 +7,6 @@ class MusiciansController < ApplicationController
     end
   end
 
-  def show
-    @musician = Musician.find(params[:id])
-    authorize @musician
-  end
-
   def new
     @musician = Musician.new
     authorize @musician
@@ -21,7 +16,7 @@ class MusiciansController < ApplicationController
     @musician = Musician.new(name: params[:musician][:name])
     authorize @musician
     if @musician.save
-      redirect_to musician_path(@musician), notice: "Recording Information Updated"
+      redirect_to musicians_path, notice: "Musician Record Created"
     else
       render :show
     end
