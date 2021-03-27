@@ -4,8 +4,13 @@
 
 body {
   margin: 0;
+  background: #F8F8F8;
 
   font-family: 'Lexend', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #254E70;
 }
 
 a {
@@ -25,6 +30,9 @@ ul{
 #main-section {
   width: 70%;
   padding: 24px;
+
+  display: flex;
+  justify-content: center;
 }
 
 #info-bar {
