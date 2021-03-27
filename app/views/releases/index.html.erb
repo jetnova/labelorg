@@ -1,12 +1,18 @@
 <h3><%= current_user.record_label.name %> Releases</h3>
-<%= form_tag record_label_releases_path(current_user.record_label), class: "form-inline", method: :get do %>
-  <%= text_field_tag :query,
-    params[:query],
-    class: "form-control form-control-sm mb-2",
-    placeholder: "Search..."
-  %>
-  <%= submit_tag "Submit" %>
-<% end %>
+<div class="search-form">
+  <%= form_tag record_label_releases_path(current_user.record_label), class: "form-inline", method: :get do %>
+  <div>
+    <%= text_field_tag :query,
+      params[:query],
+      class: "form-control form-control-sm mb-2",
+      placeholder: "Search..."
+    %>
+  </div>
+  <div>
+    <%= submit_tag "Search" %>
+  </div>
+  <% end %>
+</div>
 <% if @releases %>
   <ul>
       <% @releases.each do |release| %>

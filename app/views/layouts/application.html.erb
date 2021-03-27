@@ -22,21 +22,9 @@
         </div>
       </div>
 
-      <div id="info-bar">
-        <h3>Upcoming Releases</h3>
-        <ul>
-          <% upc_rels(current_user.record_label).each do |release| %>
-            <li><%= release %></li>
-          <% end %>
-        </ul>
-        <hr>
-        <h3>Upcoming Deal Terminations</h3>
-        <ul>
-          <% upc_deal_terms(current_user.record_label).each do |release| %>
-            <li><%= release %></li>
-          <% end %>
-        </ul>
-      </div>
+    <% if user_signed_in? %>
+      <%= render 'shared/info_bar' %>
+    <% end %>
 
     </div>
 
