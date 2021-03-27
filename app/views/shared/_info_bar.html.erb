@@ -8,8 +8,8 @@
   <hr>
   <h3>Upcoming Deal Terminations</h3>
   <ul>
-    <% upc_deal_terms(current_user.record_label).each do |release| %>
-      <li><%= release %></li>
+    <% upc_deal_terms(current_user.record_label).each do |deal| %>
+      <li><%= "#{deal[0]} - #{deal[1].strftime('%a %-d %b %Y')}" %></li>
     <% end %>
   </ul>
 </div>

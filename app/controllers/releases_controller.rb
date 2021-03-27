@@ -11,9 +11,10 @@ class ReleasesController < ApplicationController
     @release = Release.new
     authorize @release
     # @record_deals = policy_scope(RecordDeal)
+    # @release_recording = ReleaseRecording.new
+    # authorize @release_recording
     @territories = Territory.all
     @formats = Format.all
-
   end
 
   def show

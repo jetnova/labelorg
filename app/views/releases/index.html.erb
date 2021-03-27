@@ -1,6 +1,6 @@
-<h3><%= current_user.record_label.name %> Releases</h3>
+<h3 class="text-center"><%= current_user.record_label.name %> Releases</h3>
 <div class="search-form">
-  <%= form_tag record_label_releases_path(current_user.record_label), class: "form-inline", method: :get do %>
+  <%= form_tag record_label_releases_path(current_user.record_label), method: :get do %>
   <div>
     <%= text_field_tag :query,
       params[:query],
@@ -8,20 +8,20 @@
       placeholder: "Search..."
     %>
   </div>
-  <div>
+  <div class="flex just-cont-cent marg-16px">
     <%= submit_tag "Search" %>
   </div>
   <% end %>
 </div>
 <% if @releases %>
-  <ul>
-      <% @releases.each do |release| %>
-        <h4><%= release_acts_formatter(release) %></h4>
-        <li>
-          <%= link_to "#{release.title}", record_label_release_path(current_user.record_label, release) %>, <%= release.format.description %>, <%= release.territory.name %>, <%= release.release_date %>
-        </li>
-      <% end %>
-  </ul>
+    <% @releases.each do |release| %>
+      <details>
+        <summary><%= release_acts_formatter(release) %> - <em><%= release.title %></em></summary>
+        <p><%= release.format.description %></p>
+        <p><%= release.territory.name %></p>
+        <p><%= release.release_date %></p>
+        <%= link_to "Full Release Details", record_label_release_path(current_user.record_label, release) %>
+      </details>
+    <% end %>
 <% end %>
 <%= link_to 'Create New Release', new_record_label_release_path(current_user.record_label) if current_user.admin? %>
-<%= link_to 'Back to Home', authenticated_root_path %>

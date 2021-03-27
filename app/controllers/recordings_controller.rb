@@ -12,6 +12,17 @@ class RecordingsController < ApplicationController
     authorize @recording
   end
 
+  def new
+    @recording = Recording.new
+    authorize @recording
+    @song = Song.new
+    authorize @song
+    @songs = policy_scope(Song).song_search(params[:query])
+  end
+
+  def create
+  end
+
   def update
     @recording = Recording.find(params[:id])
     authorize @recording

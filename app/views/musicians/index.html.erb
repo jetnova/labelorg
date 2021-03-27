@@ -1,12 +1,18 @@
-<h3>Musicians</h3>
-<%= form_tag musicians_path, class: "form-inline", method: :get do %>
-  <%= text_field_tag :query,
-    params[:query],
-    class: "form-control form-control-sm mb-2",
-    placeholder: "Search..."
-  %>
-  <%= submit_tag "Search" %>
+<h3 class="text-center">Musicians</h3>
+<div class="search-form">
+  <%= form_tag musicians_path, class: "form-inline", method: :get do %>
+  <div>
+    <%= text_field_tag :query,
+      params[:query],
+      class: "form-control form-control-sm mb-2",
+      placeholder: "Search..."
+    %>
+  </div>
+  <div class="flex just-cont-cent marg-16px">
+    <%= submit_tag "Search" %>
+  </div>
 <% end %>
+</div>
 <% if @musicians %>
   <ul>
       <% @musicians.each do |musician| %>
@@ -15,4 +21,3 @@
   </ul>
 <% end %>
 <%= link_to 'Create New Musician Record', new_musician_path %>
-<%= link_to 'Back to Home', authenticated_root_path %>
