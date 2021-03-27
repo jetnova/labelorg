@@ -4,6 +4,7 @@ class RecordLabel < ApplicationRecord
   has_many :record_deals, dependent: :destroy
 
   has_many :acts, through: :record_deals
+  has_many :releases, through: :record_deals
 
   validates :name, presence: true
   validates :name, uniqueness: true

@@ -2,6 +2,7 @@ class RecordLabelsController < ApplicationController
   def show
     @record_label = RecordLabel.find(current_user.record_label.id)
     authorize @record_label
+    @releases = policy_scope(Release)
   end
 
   def new
