@@ -1,0 +1,15 @@
+<h3>New Recording</h3>
+
+<%= simple_form_for [current_user.record_label, @recording] do |f| %>
+  <div>
+    <%= f.input :title, label: 'Recording Title', placeholder: 'The Greatest Song in the World' %>
+    <%= f.association :musicians, label: 'Performers', input_html: { class: 'select2', multiple: "multiple" }  %>
+    <%= f.input :isrc, label: 'ISRC', placeholder: 'US-RC1-76-07839' %>
+    <%= f.input :bpm, label: 'BPM'%>
+    <%= f.input :audio_file, as: :file %>
+    <%= f.input :genre, collection: @genres, label: 'Primary Genre' %>
+  </div>
+  <div>
+    <%= f.button :submit %>
+  </div>
+<% end %>
