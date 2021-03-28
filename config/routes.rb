@@ -9,7 +9,8 @@ Rails.application.routes.draw do
     resources :releases
   end
 
-  resources :musicians
+  resources :musicians, except: :show
+  resources :songs, except: :show
 
   devise_scope :user do
     authenticated :user do

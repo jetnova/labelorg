@@ -4,7 +4,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
-gem 'cloudinary', '~> 1.16.0'
+gem 'aws-sdk-rails', '~> 3'
+gem 'aws-sdk-s3', '~> 1'
 gem 'devise'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
@@ -18,6 +19,7 @@ gem 'pundit'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 gem 'simple_form'
+gem 'taglib-ruby', '~> 0.7.1'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker

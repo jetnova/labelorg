@@ -5,6 +5,14 @@ class RecordingPolicy < ApplicationPolicy
     end
   end
 
+  def new?
+    user.admin?
+  end
+
+  def create?
+    new?
+  end
+
   def update?
     user.admin?
   end

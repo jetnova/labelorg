@@ -1,4 +1,4 @@
-class MusicianPolicy < ApplicationPolicy
+class SongPolicy < ApplicationPolicy
   def new?
     true
   end
