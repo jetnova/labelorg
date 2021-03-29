@@ -3,10 +3,11 @@
 <%= simple_form_for @musician do |f| %>
   <div class="form-inputs">
     <%= f.input :name %>
-    <%= f.input :dob, label: 'Date of Birth', start_year: Date.today.year - 100,
-                              end_year: Date.today.year,
-                              order: [:day, :month, :year],
-                              input_html: { name: 'musician[dob_d]' } %>
+    <%= f.input :dob, as: :date,
+                      html5: true,
+                      label: 'Date of Birth', start_year: Date.today.year - 100,
+                      end_year: Date.today.year,
+                      order: [:day, :month, :year] %>
     <%= f.input :cob, label: 'Country of Birth', collection: MusiciansHelper::COUNTRIES %>
     <%= f.input :nationality %>
     <%= f.input :ipi, label: 'IPI' %>
