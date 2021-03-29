@@ -10,7 +10,7 @@ class Act < ApplicationRecord
   has_many :record_labels, through: :record_deals
   has_many :acts, through: :act_musicians
 
-  has_one_attached :photo, dependent: :destroy
+  has_many_attached :photos
 
   validates :name, presence: true
 end

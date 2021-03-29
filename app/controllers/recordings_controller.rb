@@ -15,6 +15,8 @@ class RecordingsController < ApplicationController
   def new
     @recording = Recording.new
     authorize @recording
+    @acts = policy_scope(Act)
+    @songs = policy_scope(Song)
     @genres = policy_scope(Genre)
   end
 

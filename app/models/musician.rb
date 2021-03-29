@@ -15,6 +15,7 @@ class Musician < ApplicationRecord
   has_many :musicians, through: :act_musicians
 
   validates :name, presence: true
+  validates :cob, inclusion: { in: MusiciansHelper::CODES }
 
   include PgSearch::Model
   pg_search_scope :musicians_search,

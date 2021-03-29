@@ -14,6 +14,8 @@
   <% end %>
 </div>
 
+<%= link_to 'Create New Recording', new_record_label_recording_path(current_user.record_label) %>
+
 <% if @recordings %>
   <% @recordings.each do |recording| %>
     <details>
