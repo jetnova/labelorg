@@ -10,9 +10,9 @@ class SongsController < ApplicationController
   end
 
   def create
-    @song = Song.new(title: params[:song][:title], iswc: params[:song][:iswc])
+    @song = Song.new(song_params)
     authorize @song
-    params[:song][:musician_ids].each do |id|
+    musician_params.each do |id|
       SongCreator.create(song_id: @song, musician_id: id)
     end
     if @song.save
@@ -28,6 +28,10 @@ class SongsController < ApplicationController
   private
 
   def song_params
+    params.require(:song).permit(:title, :iswc)
+  end
 
+  def musician_params
+    params.require(:song).permit(:musician_ids)
   end
 end

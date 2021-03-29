@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_26_171949) do
+ActiveRecord::Schema.define(version: 2021_03_29_210431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,9 +79,9 @@ ActiveRecord::Schema.define(version: 2021_03_26_171949) do
     t.date "dob"
     t.string "cob"
     t.string "nationality"
-    t.string "ipi"
-    t.string "cae"
+    t.string "ipicae"
     t.string "isrc_stem"
+    t.date "dod"
   end
 
   create_table "playlist_recordings", force: :cascade do |t|
@@ -172,6 +172,7 @@ ActiveRecord::Schema.define(version: 2021_03_26_171949) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "isrc"
     t.integer "bpm"
+    t.text "lyrics"
     t.index ["genre_id"], name: "index_recordings_on_genre_id"
     t.index ["song_id"], name: "index_recordings_on_song_id"
   end
@@ -217,14 +218,14 @@ ActiveRecord::Schema.define(version: 2021_03_26_171949) do
     t.index ["territory_id"], name: "index_releases_on_territory_id"
   end
 
-  create_table "song_composers", force: :cascade do |t|
+  create_table "song_creators", force: :cascade do |t|
     t.bigint "musician_id", null: false
     t.bigint "song_id", null: false
     t.float "split"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["musician_id"], name: "index_song_composers_on_musician_id"
-    t.index ["song_id"], name: "index_song_composers_on_song_id"
+    t.index ["musician_id"], name: "index_song_creators_on_musician_id"
+    t.index ["song_id"], name: "index_song_creators_on_song_id"
   end
 
   create_table "songs", force: :cascade do |t|
@@ -285,7 +286,7 @@ ActiveRecord::Schema.define(version: 2021_03_26_171949) do
   add_foreign_key "releases", "record_deals"
   add_foreign_key "releases", "release_types"
   add_foreign_key "releases", "territories"
-  add_foreign_key "song_composers", "musicians"
-  add_foreign_key "song_composers", "songs"
+  add_foreign_key "song_creators", "musicians"
+  add_foreign_key "song_creators", "songs"
   add_foreign_key "users", "record_labels"
 end

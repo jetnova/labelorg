@@ -1,9 +1,8 @@
-<h3>New Song</h3>
+<h3>New Musical Work/Song</h3>
 
 <%= simple_form_for @song do |f| %>
-  <%= f.input :title, label: 'Song Title', placeholder: 'The Greatest Song in the World' %>
+  <%= f.input :title, label: 'Work/Song Title', placeholder: 'The Greatest Song in the World' %>
   <%= f.input :iswc, label: 'ISWC', placeholder: 'T-034.524.680-1' %>
-  <%= f.input :lyrics %>
   <%= f.association :musicians, label: 'Creators', input_html: { class: 'select2 full-width-input', multiple: "multiple" }  %>
   <div class="flex just-cont-cent">
     <%= f.button :submit %>

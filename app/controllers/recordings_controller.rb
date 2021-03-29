@@ -37,5 +37,6 @@ class RecordingsController < ApplicationController
   private
 
   def recording_params
+    params.require(:recording).permit(:title, :isrc, :lyrics, :audio_file)
   end
 end

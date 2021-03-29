@@ -8,10 +8,14 @@
                       label: 'Date of Birth', start_year: Date.today.year - 100,
                       end_year: Date.today.year,
                       order: [:day, :month, :year] %>
+    <%= f.input :dod, as: :date,
+                      html5: true,
+                      label: 'Date of Death', start_year: Date.today.year - 100,
+                      end_year: Date.today.year,
+                      order: [:day, :month, :year] %>
     <%= f.input :cob, label: 'Country of Birth', collection: MusiciansHelper::COUNTRIES %>
     <%= f.input :nationality %>
-    <%= f.input :ipi, label: 'IPI' %>
-    <%= f.input :cae, label: 'CAE' %>
+    <%= f.input :ipicae, label: 'IPI/CAE' %>
     <%= f.input :isrc_stem, label: 'ISRC Stem' %>
   </div>
   <div class="form-actions">

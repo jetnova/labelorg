@@ -16,6 +16,7 @@ class Musician < ApplicationRecord
 
   validates :name, presence: true
   validates :cob, inclusion: { in: MusiciansHelper::CODES }
+  validates :ipicae, length: { is: 11 }
 
   include PgSearch::Model
   pg_search_scope :musicians_search,
