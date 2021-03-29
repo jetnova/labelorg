@@ -17,7 +17,7 @@ class Recording < ApplicationRecord
   # N:N with record_deals, join table being record_deal_recordings
   has_many :record_deals, through: :record_deal_recordings
 
-  has_one_attached :audio_files
+  has_one_attached :audio_file
 
   validates :title, presence: true
 

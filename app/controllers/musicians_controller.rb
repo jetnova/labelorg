@@ -13,12 +13,13 @@ class MusiciansController < ApplicationController
   end
 
   def create
-    @musician = Musician.new(name: params[:musician][:name])
+    dob = Date.new(musician_params[:"dob(1i)"], musician_params[:"dob(2i)"], musician_params[:"dob(3i)"])
+    @musician = Musician.new(name: params[:musician][:name], dob: params[:musician][:dob], cob: params[:musician][:cob])
     authorize @musician
     if @musician.save
       redirect_to musicians_path, notice: "Musician Record Created"
     else
-      render :show
+      render :new
     end
   end
 
@@ -26,5 +27,11 @@ class MusiciansController < ApplicationController
   end
 
   def update
+  end
+
+  private
+
+  def musician_params
+    params.require(:musician).permit(:name, :"dob(1i)", :"dob(2i)", :"dob(3i)", :cob)
   end
 end
