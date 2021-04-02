@@ -1,21 +1,42 @@
-
-
 <h3>New Recording</h3>
 
-<div class="create-form">
-  <%= simple_form_for [current_user.record_label, @recording] do |f| %>
-    <div>
-      <%= f.association :song, label: 'Song/Musical Work', hint: "Work not in database? Add #{link_to 'here', new_song_path} before continuing".html_safe, input_html: { class: 'select2' }  %>
-      <%= f.input :title, label: 'Recording Title', placeholder: 'The Greatest Song in the World' %>
-      <%= f.association :acts, label: 'Band(s)/Act(s)', input_html: { class: 'select2', multiple: "multiple" }  %>
-      <%= f.association :musicians, label: 'Performers', input_html: { class: 'select2', multiple: "multiple" }  %>
-      <%= f.input :isrc, label: 'ISRC', placeholder: 'US-RC1-76-07839' %>
-      <%= f.input :bpm, label: 'BPM'%>
-      <%= f.input :genre, collection: @genres, label: 'Primary Genre' %>
-      <%= f.input :audio_file, as: :file %>
+<%= simple_form_for [current_user.record_label, @recording] do |f| %>
+  <div>
+    <%= f.association :song, label: 'Song/Musical Work',
+                              hint: "Work not in database? Add #{link_to 'here', new_song_path} before continuing".html_safe,
+                              input_html: { class: 'select2' }  %>
+    <%= f.input       :title, label: 'Recording Title',
+                              placeholder: 'The Greatest Song in the World',
+                              input_html: {class: 'full-width-input'} %>
+    <%= f.association :acts,  label: 'Band/Act',
+                              input_html: {
+                                class: 'select2 full-width-input'
+                              } %>
+    <%= f.association :musicians, label: 'Performer',
+                                  input_html: {
+                                    class: 'select2 full-width-input'
+                                  } %>
+    <%= f.association :musicians, label: 'Producer',
+                                  input_html: {
+                                    class: 'select2 full-width-input'
+                                  } %>
+    <%= f.input :isrc,  label: 'ISRC',
+                        placeholder: 'US-RC1-76-07839',
+                        input_html: {class: 'full-width-input'} %>
+    <%= f.input :lyrics, input_html: {class: 'full-width-input'} %>
+
+    <div class="side-by-side-inputs">
+      <%= f.input :bpm, label: 'BPM',
+                        input_html: { value: 120, min: 50, max: 200 }%>
+      <%= f.association :genre, label: 'Primary Genre' %>
     </div>
-    <div>
-      <%= f.button :submit %>
-    </div>
-  <% end %>
-</div>
+
+    <%= f.input :audio_file, as: :file %>
+
+  </div>
+
+  <div class="flex just-cont-cent">
+    <%= f.button :submit %>
+  </div>
+
+<% end %>

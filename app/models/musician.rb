@@ -11,11 +11,12 @@ class Musician < ApplicationRecord
   has_many :recordings, through: :recording_performers
   # N:N with recording_acts, join table being recording_performers
   has_many :recording_acts, through: :recording_performers
-  # N:N with musicians, join table being act_musicians
-  has_many :musicians, through: :act_musicians
+  # N:N with acts, join table being act_musicians
+  has_many :acts, through: :act_musicians
 
   validates :name, presence: true
   validates :cob, inclusion: { in: MusiciansHelper::CODES }
+  validates :ipicae, length: { is: 11 }
 
   include PgSearch::Model
   pg_search_scope :musicians_search,

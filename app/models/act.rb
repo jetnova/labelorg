@@ -8,7 +8,7 @@ class Act < ApplicationRecord
   has_many :recordings, through: :recording_acts
   has_many :releases, through: :release_acts
   has_many :record_labels, through: :record_deals
-  has_many :acts, through: :act_musicians
+  has_many :musicians, through: :act_musicians
 
   has_many_attached :photos
 

@@ -31,6 +31,6 @@ class MusiciansController < ApplicationController
   private
 
   def musician_params
-    params.require(:musician).permit(:name, :dob, :cob)
+    params.require(:musician).permit(:name, :dob, :cob, :ipicae)
   end
 end
