@@ -1,13 +1,10 @@
-const insertCreatorFields = () => {
-  const creators = document.querySelector('.creators');
-  const creator = document.querySelector('.creator').outerHTML;
-  creators.insertAdjacentHTML('beforeend', creator);
-};
+import { initSelect2 } from './init_select2';
 
 const addCreator = () => {
-  console.log('in add creator');
-  const addCreatorBtn = document.getElementById('add-creator');
-  addCreatorBtn.addEventListener('click', insertCreatorFields);
+  document.querySelector('.add-fields').addEventListener('click', () => {
+    document.querySelector('.hidden').classList.remove('hidden');
+    initSelect2();
+  });
 };
 
 export { addCreator };

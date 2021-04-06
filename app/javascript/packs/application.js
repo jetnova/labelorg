@@ -11,16 +11,15 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
-import "@fortawesome/fontawesome-free/js/all";
-
+// import "@fortawesome/fontawesome-free/js/all";
 import { initSelect2 } from '../components/init_select2';
+
 import{ addCreator } from '../components/add_creator_form_fields';
 
-document.addEventListener("turbolinks:load", function() {
+document.addEventListener("turbolinks:load", () => {
 
-  initSelect2();
-
-  if (document.getElementById('add_creator')) {
+  if (document.querySelector('.add-fields')) {
+    initSelect2();
     addCreator();
   }
 });

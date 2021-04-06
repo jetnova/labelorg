@@ -10,16 +10,33 @@
         <%= creators_form.input :musician_id,  collection: @musicians,
                                             label: 'Creator',
                                             hint: "Creator not in database? Add #{link_to 'here', new_musician_path} before continuing".html_safe,
-                                            input_html: { class: 'select2 full-width-input' } %>
+                                            input_html: { class: 'select2' } %>
         <div class="side-by-side-inputs">
-          <%= creators_form.input :perf_share, label: 'Perf. Rights Share (%)' %>
-          <%= creators_form.input :mech_share, label: 'Mech. Rights Share (%)' %>
+          <%= creators_form.input :perf_share, label: 'Perf. Rights Share (%)', input_html: { class: 'perf-share' } %>
+          <%= creators_form.input :mech_share, label: 'Mech. Rights Share (%)', input_html: { class: 'mech-share' } %>
         </div>
       <% end %>
       <hr>
     </div>
+
+    <% 19.times do %>
+      <div class="creator hidden">
+        <%= f.simple_fields_for :song_creators do |creators_form| %>
+          <%= creators_form.input :musician_id,  collection: @musicians,
+                                              label: 'Creator',
+                                              hint: "Creator not in database? Add #{link_to 'here', new_musician_path} before continuing".html_safe,
+                                              input_html: { class: 'select2' } %>
+          <div class="side-by-side-inputs">
+            <%= creators_form.input :perf_share, label: 'Perf. Rights Share (%)', input_html: { class: 'perf-share' } %>
+            <%= creators_form.input :mech_share, label: 'Mech. Rights Share (%)', input_html: { class: 'mech-share' } %>
+          </div>
+        <% end %>
+        <hr>
+      </div>
+    <% end %>
+
   </div>
-  <i id="add-creator" class="fas fa-plus"></i>
+  <i class="fas fa-plus add-fields"></i>
   <div class="flex just-cont-cent">
     <%= f.button :submit %>
   </div>
